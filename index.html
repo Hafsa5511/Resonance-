@@ -247,6 +247,116 @@
   opacity: 0;
   transition: bottom 0.1s ease-out, opacity 0.3s ease-out;
 }
+      
+      
+      .color-palette-section {
+  margin: 80px 0;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 30px;
+  border: 1px solid rgba(133, 120, 150, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.palette-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.color-swatches {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  min-height: 120px;
+  align-items: center;
+}
+
+.loading-text {
+  color: rgba(133, 120, 150, 0.7);
+  font-style: italic;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.color-swatch {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: swatch-appear 0.5s ease-out backwards;
+}
+
+@keyframes swatch-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.color-swatch:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.color-info {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 8px 15px;
+  border-radius: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  font-size: 12px;
+  color: #fff;
+  border: 1px solid rgba(133, 120, 150, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.color-swatch:hover .color-info {
+  opacity: 1;
+}
+
+.color-code {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.copy-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.copy-indicator.show {
+  opacity: 1;
+}
     </style>
   </head>
 
@@ -274,6 +384,17 @@
 
           </div>
         </div>
+        
+        
+        <div class="color-palette-section">
+  <h2 class="section-title">Color Palette</h2>
+  <p class="palette-description">Colors extracted from this project</p>
+  
+  <div class="color-swatches" id="colorSwatches">
+    <div class="loading-text">Analyzing colors...</div>
+  </div>
+</div>
+        
 
         <!-- Main Project Image -->
         <div class="project-image-section">
@@ -539,6 +660,166 @@
   window.addEventListener('resize', updateProgress);
   
   updateProgress();
+</script>
+    
+    
+    <script>
+  // Color Palette Extractor
+  function extractColors() {
+    const mainImage = document.querySelector('.project-image');
+    const swatchesContainer = document.getElementById('colorSwatches');
+    
+    if (!mainImage) return;
+    
+    // Create a canvas to analyze the image
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Wait for image to load
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.src = mainImage.src;
+    
+    img.onload = function() {
+      // Set canvas size (smaller for faster processing)
+      canvas.width = 100;
+      canvas.height = 100;
+      
+      // Draw image on canvas
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+      // Get image data
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const pixels = imageData.data;
+      
+      // Extract colors using k-means clustering (simplified)
+      const colors = [];
+      const sampleRate = 10; // Sample every 10th pixel
+      
+      for (let i = 0; i < pixels.length; i += 4 * sampleRate) {
+        const r = pixels[i];
+        const g = pixels[i + 1];
+        const b = pixels[i + 2];
+        const a = pixels[i + 3];
+        
+        // Skip very transparent or very dark/light pixels
+        if (a > 200 && (r + g + b) > 50 && (r + g + b) < 700) {
+          colors.push({ r, g, b });
+        }
+      }
+      
+      // Get dominant colors (simplified clustering)
+      const dominantColors = getDominantColors(colors, 5);
+      
+      // Display swatches
+      displaySwatches(dominantColors, swatchesContainer);
+    };
+    
+    img.onerror = function() {
+      swatchesContainer.innerHTML = '<p style="color: rgba(255, 255, 255, 0.5);">Unable to extract colors from this image.</p>';
+    };
+  }
+  
+  function getDominantColors(colors, count) {
+    if (colors.length === 0) return [];
+    
+    // Simple clustering: group similar colors
+    const clusters = [];
+    
+    colors.forEach(color => {
+      let foundCluster = false;
+      
+      for (let cluster of clusters) {
+        const diff = Math.abs(color.r - cluster.r) + 
+                     Math.abs(color.g - cluster.g) + 
+                     Math.abs(color.b - cluster.b);
+        
+        if (diff < 100) {
+          cluster.colors.push(color);
+          foundCluster = true;
+          break;
+        }
+      }
+      
+      if (!foundCluster) {
+        clusters.push({ ...color, colors: [color] });
+      }
+    });
+    
+    // Sort by cluster size and get averages
+    clusters.sort((a, b) => b.colors.length - a.colors.length);
+    
+    return clusters.slice(0, count).map(cluster => {
+      const avg = cluster.colors.reduce((acc, c) => ({
+        r: acc.r + c.r,
+        g: acc.g + c.g,
+        b: acc.b + c.b
+      }), { r: 0, g: 0, b: 0 });
+      
+      return {
+        r: Math.round(avg.r / cluster.colors.length),
+        g: Math.round(avg.g / cluster.colors.length),
+        b: Math.round(avg.b / cluster.colors.length)
+      };
+    });
+  }
+  
+  function rgbToHex(r, g, b) {
+    return "#" + [r, g, b].map(x => {
+      const hex = x.toString(16);
+      return hex.length === 1 ? "0" + hex : hex;
+    }).join('');
+  }
+  
+  function displaySwatches(colors, container) {
+    container.innerHTML = '';
+    
+    colors.forEach((color, index) => {
+      const hex = rgbToHex(color.r, color.g, color.b);
+      const rgb = `rgb(${color.r}, ${color.g}, ${color.b})`;
+      
+      const swatch = document.createElement('div');
+      swatch.className = 'color-swatch';
+      swatch.style.backgroundColor = rgb;
+      swatch.style.animationDelay = (index * 0.1) + 's';
+      
+      const info = document.createElement('div');
+      info.className = 'color-info';
+      info.innerHTML = `
+        <div class="color-code">${hex}</div>
+        <div style="font-size: 10px; margin-top: 3px; opacity: 0.7;">Click to copy</div>
+      `;
+      
+      swatch.appendChild(info);
+      
+      // Copy to clipboard on click
+      swatch.addEventListener('click', () => {
+        navigator.clipboard.writeText(hex).then(() => {
+          showCopyIndicator(swatch, 'Copied!');
+        });
+      });
+      
+      container.appendChild(swatch);
+    });
+  }
+  
+  function showCopyIndicator(element, text) {
+    const indicator = document.createElement('div');
+    indicator.className = 'copy-indicator';
+    indicator.textContent = text;
+    element.appendChild(indicator);
+    
+    setTimeout(() => indicator.classList.add('show'), 10);
+    setTimeout(() => {
+      indicator.classList.remove('show');
+      setTimeout(() => indicator.remove(), 300);
+    }, 1500);
+  }
+  
+  // Run extraction when page loads
+  window.addEventListener('load', () => {
+    setTimeout(extractColors, 500);
+  });
 </script>
   </body>
 </html>
