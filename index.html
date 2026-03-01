@@ -3,823 +3,332 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
-
-    <title>Resonance - Hafsa Abbasi</title>
+    <title>Brand Design - Hafsa Abbasi</title>
     <style>
-      * {
-        cursor: none !important;
-      }
+      * { cursor: none !important; box-sizing: border-box; }
 
-      /* Main cursor dot */
       .custom-cursor {
-        position: fixed;
-        width: 8px;
-        height: 8px;
-        background: rgba(255, 215, 0, 0.9);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 10000;
-        transition: transform 0.15s ease-out, opacity 0.15s ease-out;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6),
-          0 0 25px rgba(255, 215, 0, 0.3);
+        position: fixed; width: 8px; height: 8px;
+        background: rgba(255,215,0,0.9); border-radius: 50%;
+        pointer-events: none; z-index: 10000;
+        transition: transform 0.15s ease-out;
+        box-shadow: 0 0 15px rgba(255,215,0,0.6), 0 0 25px rgba(255,215,0,0.3);
       }
-
-      /* Outer ring */
       .cursor-ring {
-        position: fixed;
-        width: 40px;
-        height: 40px;
-        border: 1px solid rgba(255, 215, 0, 0.4);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
+        position: fixed; width: 40px; height: 40px;
+        border: 1px solid rgba(255,215,0,0.4); border-radius: 50%;
+        pointer-events: none; z-index: 9999;
         transition: all 0.2s ease-out;
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        box-shadow: 0 0 20px rgba(255,215,0,0.2);
       }
-
-      /* Sparkle trail */
       .cursor-sparkle {
-        position: fixed;
-        width: 4px;
-        height: 4px;
-        background: rgba(255, 215, 0, 0.8);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9998;
+        position: fixed; width: 4px; height: 4px;
+        background: rgba(255,215,0,0.8); border-radius: 50%;
+        pointer-events: none; z-index: 9998;
         animation: sparkle-fade 0.8s ease-out forwards;
-        box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
       }
+      @keyframes sparkle-fade { 0% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(0.3); } }
+      .cursor-ring.hover { width:60px; height:60px; border-color:rgba(255,215,0,0.7); border-width:2px; }
+      .custom-cursor.hover { transform:scale(0.6); background:rgba(255,215,0,1); }
 
-      @keyframes sparkle-fade {
-        0% {
-          opacity: 1;
-          transform: scale(1);
-        }
+      #starfield { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
 
-        100% {
-          opacity: 0;
-          transform: scale(0.3);
-        }
-      }
-
-      .cursor-ring.hover {
-        width: 60px;
-        height: 60px;
-        border-color: rgba(255, 215, 0, 0.7);
-        border-width: 2px;
-      }
-
-      .custom-cursor.hover {
-        transform: scale(0.6);
-        background: rgba(255, 215, 0, 1);
-      }
-
-      #starfield {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #000;
-        color: #fff;
-        font-family: 'Ysabeau Infant', sans-serif;
-        position: relative;
-        min-height: 100vh;
-      }
-
-      .page-wrapper {
-        width: 1440px;
-        margin: 0 auto;
-        position: relative;
-      }
-
-      .container {
-        width: 1200px;
-        margin: 0 auto;
-        padding: 0;
-      }
+      body { margin:0; padding:0; background:#000; color:#fff; font-family:'Ysabeau Infant',sans-serif; }
 
       @font-face {
         font-family: 'TheScientist';
-        src: url('TheScientist-L3EyW.woff') format('woff');
-      }
-      
-       @font-face {
-        font-family: 'TheScientist';
-        src: url('TheScientist-L3EyW.ttf') format('truetype');
+        src: url('TheScientist-L3EyW.woff') format('woff'), url('TheScientist-L3EyW.ttf') format('truetype');
       }
 
-      /* Close Button */
-      .close-btn {
-        position: fixed;
-        top: 40px;
-        right: 60px;
-        font-size: 40px;
-        color: rgba(255, 169, 88, 1);
-        text-decoration: none;
-        z-index: 100;
-        transition: transform 0.3s, color 0.3s;
-        font-weight: 300;
-      }
+      .scroll-progress { position:fixed; top:0; right:60px; height:100vh; width:2px; background:rgba(255,215,0,0.1); z-index:50; pointer-events:none; }
+      .progress-line { position:absolute; top:0; left:0; width:100%; height:0%; background:linear-gradient(180deg,rgba(133,120,150,0.3) 0%,rgba(133,120,150,0.8) 50%,rgba(133,120,150,1) 100%); transition:height 0.1s ease-out; }
+      .progress-glow { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:8px; height:8px; background:rgba(133,120,150,1); border-radius:50%; box-shadow:0 0 15px rgba(133,120,150,0.8); opacity:0; transition:bottom 0.1s ease-out,opacity 0.3s ease-out; }
 
-      .close-btn:hover {
-        transform: rotate(90deg);
-        color: rgba(255, 215, 0, 1);
-      }
+      .close-btn { position:fixed; top:40px; right:100px; font-size:40px; color:rgba(255,169,88,1); text-decoration:none; z-index:100; transition:transform 0.3s,color 0.3s; font-weight:300; }
+      .close-btn:hover { transform:rotate(90deg); color:rgba(255,215,0,1); }
 
-      /* Project Content */
-      .project-content {
-        padding: 150px 0 100px 0;
-      }
+      .page-wrapper { max-width:1200px; margin:0 auto; padding:0 60px 100px; }
 
-      .project-header {
-        margin-bottom: 80px;
+      /* HERO */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        min-height: 100vh;
+        padding-top: 80px;
+        padding-bottom: 60px;
       }
-
       .project-title {
         font-family: 'TheScientist', cursive;
-        font-size: 60px;
-        color: rgba(255, 169, 88, 1);
-        margin-bottom: 20px;
+        font-size: 52px; color: rgba(255,169,88,1);
+        margin: 0 0 14px; line-height: 1.1;
       }
-
-      .project-meta {
-        font-size: 18px;
-        color: rgba(255, 169, 88, 0.7);
-        margin-bottom: 40px;
+      .project-meta { font-size:13px; color:rgba(255,169,88,0.55); margin:0 0 28px; letter-spacing:0.5px; }
+      .hero-intro { font-size:16px; line-height:2; color:rgba(255,255,255,0.8); margin:0 0 36px; }
+      .project-role {
+        padding-top:24px; border-top:1px solid rgba(255,169,88,0.2);
+        display:grid; grid-template-columns:1fr 1fr; gap:20px;
       }
+      .role-item label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,169,88,0.55); margin-bottom:4px; }
+      .role-item span { font-size:13px; color:rgba(255,255,255,0.75); line-height:1.6; }
+      .hero-image img { width:100%; height:auto; border-radius:20px; display:block; }
 
-      .project-description {
-        font-size: 16px;
-        line-height: 2.5;
-        letter-spacing: 0.3px;
-        max-width: 800px;
-        margin-bottom: 80px;
-      }
+      /* SECTION */
+      .section-divider { border:none; border-top:1px solid rgba(255,169,88,0.12); margin:0; }
+      .content-section { padding:80px 0; }
+      .section-label { font-family:'TheScientist',cursive; font-size:12px; text-transform:uppercase; letter-spacing:3px; color:rgba(255,169,88,0.45); margin:0 0 12px; }
+      .section-title { font-family:'TheScientist',cursive; font-size:36px; color:rgba(255,169,88,1); margin:0 0 32px; }
 
-      /* Project Images */
-      .project-image-section {
-        margin-bottom: 80px;
-      }
-
-      .project-image {
-        width: 600px;
-        height: auto;
-        border-radius: 30px;
-        margin-bottom: 40px;
-      }
-
-      .image-caption {
-        font-size: 14px;
-        color: rgba(255, 169, 88, 0.7);
-        font-style: italic;
-        margin-bottom: 60px;
-      }
-
-      .section-title {
-        font-family: 'TheScientist', cursive;
-        font-size: 40px;
-        color: rgba(255, 169, 88, 1);
-        margin-bottom: 40px;
-        margin-top: 80px;
-      }
-
-      .two-column-grid {
+      /* SPLIT TEXT + IMAGE */
+      .split-row {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-        margin-bottom: 60px;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        margin-bottom: 40px;
       }
+      .split-row.flip { direction:rtl; }
+      .split-row.flip > * { direction:ltr; }
+      .split-copy { font-size:16px; line-height:2; color:rgba(255,255,255,0.8); }
+      .split-copy p { margin:0 0 18px; }
+      .split-copy p:last-child { margin:0; }
+      .split-img { width:100%; border-radius:16px; display:block; }
 
-      .grid-image {
-        width: 100%;
-        height: auto;
-        border-radius: 20px;
+      /* IMAGE GRID */
+      .showcase-row { display:grid; gap:16px; margin-bottom:16px; }
+      .showcase-row.full { grid-template-columns:1fr; }
+      .showcase-row.half { grid-template-columns:1fr 1fr; }
+      .showcase-row.thirds { grid-template-columns:1fr 1fr 1fr; }
+      .showcase-img { width:100%; height:100%; object-fit:cover; border-radius:16px; display:block; transition:transform 0.4s ease,box-shadow 0.4s ease; }
+      .showcase-img:hover { transform:scale(1.01); box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+
+      /* PROCESS */
+      .process-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+      .process-grid img { width:100%; height:auto; border-radius:16px; display:block; transition:transform 0.4s ease,box-shadow 0.4s ease; }
+      .process-grid img:hover { transform:scale(1.01); box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+
+      .body-text { font-size:16px; line-height:2; color:rgba(255,255,255,0.8); max-width:620px; margin:0 0 40px; }
+
+      /* LIGHTBOX */
+      .lightbox {
+        position:fixed; inset:0;
+        background:rgba(0,0,0,0.92);
+        z-index:99999;
+        display:flex; align-items:center; justify-content:center;
+        opacity:0; pointer-events:none;
+        transition:opacity 0.3s ease;
+        backdrop-filter:blur(8px);
       }
-      
-      .scroll-progress {
-  position: fixed;
-  top: 0;
-  right: 60px;
-  height: 100vh;
-  width: 2px;
-  background: rgba(255, 215, 0, 0.1);
-  z-index: 50;
-  pointer-events: none;
-}
-
-.progress-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background: linear-gradient(180deg, 
-    rgba(133, 120, 150, 0.3) 0%, 
-    rgba(133, 120, 150, 0.8) 50%, 
-    rgba(133, 120, 150, 1) 100%);
-  box-shadow: 0 0 10px rgba(133, 120, 150, 0.5);
-  transition: height 0.1s ease-out;
-}
-
-.progress-glow {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  background: rgba(133, 120, 150, 1);
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(133, 120, 150, 0.8),
-              0 0 25px rgba(133, 120, 150, 0.5);
-  opacity: 0;
-  transition: bottom 0.1s ease-out, opacity 0.3s ease-out;
-}
-      
-      
-      .color-palette-section {
-  margin: 80px 0;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 30px;
-  border: 1px solid rgba(133, 120, 150, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.palette-description {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 30px;
-  font-style: italic;
-}
-
-.color-swatches {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  min-height: 120px;
-  align-items: center;
-}
-
-.loading-text {
-  color: rgba(133, 120, 150, 0.7);
-  font-style: italic;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-.color-swatch {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  animation: swatch-appear 0.5s ease-out backwards;
-}
-
-@keyframes swatch-appear {
-  from {
-    opacity: 0;
-    transform: scale(0.8) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.color-swatch:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-}
-
-.color-info {
-  position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.9);
-  padding: 8px 15px;
-  border-radius: 10px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  font-size: 12px;
-  color: #fff;
-  border: 1px solid rgba(133, 120, 150, 0.3);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-.color-swatch:hover .color-info {
-  opacity: 1;
-}
-
-.color-code {
-  font-family: 'Courier New', monospace;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.copy-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 12px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.copy-indicator.show {
-  opacity: 1;
-}
+      .lightbox.active { opacity:1; pointer-events:all; }
+      .lightbox img {
+        max-width:90vw; max-height:90vh;
+        border-radius:16px;
+        box-shadow:0 40px 100px rgba(0,0,0,0.8);
+        transform:scale(0.95);
+        transition:transform 0.3s ease;
+        object-fit:contain;
+        cursor: zoom-out !important;
+      }
+      .lightbox.active img { transform:scale(1); }
+      .lightbox-close {
+        position:fixed; top:32px; right:60px;
+        font-size:40px; color:rgba(255,169,88,1);
+        background:none; border:none;
+        z-index:100000; transition:transform 0.3s,color 0.3s;
+        font-weight:300; line-height:1;
+      }
+      .lightbox-close:hover { transform:rotate(90deg); color:rgba(255,215,0,1); }
+      .showcase-img, .split-img, .process-grid img { cursor:zoom-in !important; }
     </style>
   </head>
-
   <body>
-    
-    <div class="scroll-progress">
-  <div class="progress-line"></div>
-  <div class="progress-glow"></div>
-</div>
+    <div class="scroll-progress"><div class="progress-line"></div><div class="progress-glow"></div></div>
     <canvas id="starfield"></canvas>
-
     <div class="custom-cursor"></div>
-    <div class="cursor-ring"></div> 
-
+    <div class="cursor-ring"></div>
     <a href="https://hafsa5511.github.io/portfolio/" class="close-btn">✕</a>
 
     <div class="page-wrapper">
-      <div class="container project-content">
 
-        <div class="project-header">
-          <h1 class="project-title">Resonance</h1>
-          <p class="project-meta">2024 • Poster • Illustrator, Photoshop</p>
-          <div class="project-description">
-            <p>Designed a poster and logo using Photoshop, Illustrator, and original photography, guided by client briefs and reference examples. This project involved producing all visual assets from scratch, including taking my own photographs and creating custom illustrations. The final outcome reflects the client's identity, interests, and personal flair.</p>
-
+      <!-- HERO: text left, first image right — visible on load -->
+      <div class="hero">
+        <div>
+          <h1 class="project-title">Brand Redesign —<br>Everest Masala</h1>
+          <p class="project-meta">2025 &nbsp;·&nbsp; Logo / Packaging / Socials &nbsp;·&nbsp; Illustrator · Photoshop · Adobe Firefly</p>
+          <p class="hero-intro">Everest Masala is a heritage Indian spice brand established in 1947 with strong market recognition but an outdated visual identity — suffering from poor hierarchy, cluttered layouts, weak shelf presence, and difficult-to-use packaging.</p>
+          <div class="project-role">
+            <div class="role-item"><label>Role</label><span>Brand Strategy · Visual Identity · Packaging · Social</span></div>
+            <div class="role-item"><label>Tools</label><span>Adobe Firefly · Photoshop · Illustrator</span></div>
+            <div class="role-item"><label>Timeline</label><span>6 weeks</span></div>
+            <div class="role-item"><label>Context</label><span>School Assignment</span></div>
           </div>
         </div>
-        
-        
-        <div class="color-palette-section">
-  <h2 class="section-title">Color Palette</h2>
-  <p class="palette-description">Colors extracted from this project</p>
-  
-  <div class="color-swatches" id="colorSwatches">
-    <div class="loading-text">Analyzing colors...</div>
-  </div>
-</div>
-        
-
-        <!-- Main Project Image -->
-        <div class="project-image-section">
-          <img src="resonance.png" alt="Project main image" class="project-image">
-           <img src="logo.png
-" alt="Project main image" class="project-image">
-          <p class="image-caption">Mixed-media digital poster using original photography and graphic elements, exploring texture and form</p>
+        <div>
+          <img src="bigphoto.png" alt="Everest Masala brand overview" style="width:100%;border-radius:20px;">
         </div>
-
-        <!-- Section with title -->
-        <h2 class="section-title">Process</h2>
-        <div class="project-description">
-
-        </div>
-
-        <!-- Two column grid for process images -->
-        <div class="two-column-grid">
-          <img src="mockupss.png" alt="Process step 1" class="grid-image">
-          <img src="process logos.jpg" alt="Process step 2" class="grid-image">
-        </div>
-
       </div>
+
+      <hr class="section-divider">
+
+      <!-- CONCEPT: text + logo -->
+      <div class="content-section">
+        <div class="split-row">
+          <div>
+            <p class="section-label">Concept</p>
+            <h2 class="section-title">Built to Speak</h2>
+            <div class="split-copy">
+              <p>The rebrand is built around the idea that Everest blends are architecturally precise — carefully layered with intentional structure — and communicate culture, memory, and identity through flavor.</p>
+              <p>The mountain logo references both the brand name and the layered construction of spice blends. The teal-burgundy-gold palette provides modern shelf distinction rooted in Indian heritage.</p>
+            </div>
+          </div>
+          <div>
+            <img src="logoeverest.png" alt="Everest Masala logo" class="split-img">
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- PACKAGING: image left, text right -->
+      <div class="content-section">
+        <div class="split-row flip">
+          <div>
+            <p class="section-label">Packaging</p>
+            <h2 class="section-title">Solving the UX</h2>
+            <div class="split-copy">
+              <p>The redesign shifted from rigid boxes to resealable stand-up pouches, solving every UX pain point. A Mughal arch window acts as both functional element and visual metaphor.</p>
+              <p>Traditional Indian patterns function as visual "dialects" across different spice varieties — creating variety within a cohesive system.</p>
+            </div>
+          </div>
+          <div>
+            <img src="ux.png" alt="Packaging UX" class="split-img">
+          </div>
+        </div>
+
+        <div class="showcase-row full">
+          <img src="layout.png" alt="Brand layout system" class="showcase-img">
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- MERCH -->
+      <div class="content-section">
+        <p class="section-label">Extensions</p>
+        <h2 class="section-title">Merchandise & Socials</h2>
+        <p class="body-text">The system extended across premium glass jars, branded merchandise, and a complete social media strategy for Instagram, TikTok, and Pinterest — all built with Adobe Firefly across 100+ iterations.</p>
+        <div class="showcase-row thirds">
+          <img src="merch 1.png" alt="Merchandise 1" class="showcase-img">
+          <img src="merch 2.png" alt="Merchandise 2" class="showcase-img">
+          <img src="merch 3.png" alt="Merchandise 3" class="showcase-img">
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- FINAL -->
+      <div class="content-section">
+        <p class="section-label">Result</p>
+        <h2 class="section-title">Final System</h2>
+        <div class="showcase-row full">
+          <img src="final.png" alt="Final brand presentation" class="showcase-img">
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- PROCESS -->
+      <div class="content-section">
+        <p class="section-label">Behind the Work</p>
+        <h2 class="section-title">Process</h2>
+        <div class="process-grid">
+          <img src="process 1.png" alt="Process 1">
+          <img src="process 22.png" alt="Process 2">
+          <img src="process 33.png" alt="Process 3">
+          <img src="process 4.png" alt="Process 4">
+          <img src="process 5.png" alt="Process 5">
+          <img src="process 6.png" alt="Process 6">
+          <img src="process 8.png" alt="Process 7">
+          <img src="process 9.png" alt="Process 8">
+        </div>
+      </div>
+
     </div>
 
     <script>
       const cursor = document.querySelector('.custom-cursor');
       const cursorRing = document.querySelector('.cursor-ring');
-      let mouseX = 0;
-      let mouseY = 0;
-      let ringX = 0;
-      let ringY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
-
-        if (Math.random() > 0.85) {
-          createSparkle(mouseX, mouseY);
-        }
+      let mouseX=0,mouseY=0,ringX=0,ringY=0;
+      document.addEventListener('mousemove',(e)=>{
+        mouseX=e.clientX;mouseY=e.clientY;
+        cursor.style.left=mouseX+'px';cursor.style.top=mouseY+'px';
+        if(Math.random()>0.85)createSparkle(mouseX,mouseY);
       });
-
-      function animateRing() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-
-        cursorRing.style.left = (ringX - 20) + 'px';
-        cursorRing.style.top = (ringY - 20) + 'px';
-
-        requestAnimationFrame(animateRing);
-      }
+      function animateRing(){ringX+=(mouseX-ringX)*0.15;ringY+=(mouseY-ringY)*0.15;cursorRing.style.left=(ringX-20)+'px';cursorRing.style.top=(ringY-20)+'px';requestAnimationFrame(animateRing);}
       animateRing();
-
-      function createSparkle(x, y) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'cursor-sparkle';
-        sparkle.style.left = x + 'px';
-        sparkle.style.top = y + 'px';
-        document.body.appendChild(sparkle);
-
-        setTimeout(() => sparkle.remove(), 800);
-      }
-
-      const interactiveElements = document.querySelectorAll('a, button');
-
-      interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cursor.classList.add('hover');
-          cursorRing.classList.add('hover');
-        });
-
-        el.addEventListener('mouseleave', () => {
-          cursor.classList.remove('hover');
-          cursorRing.classList.remove('hover');
-        });
+      function createSparkle(x,y){const s=document.createElement('div');s.className='cursor-sparkle';s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),800);}
+      document.querySelectorAll('a,button').forEach(el=>{
+        el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');cursorRing.classList.add('hover');});
+        el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');cursorRing.classList.remove('hover');});
       });
     </script>
 
     <script>
-      // Starfield animation
-      const canvas = document.getElementById('starfield');
-      const ctx = canvas.getContext('2d');
-
-      let stars = [];
-      let shootingStars = [];
-      let scrollY = 0;
-
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        initStars();
-      }
-
-      function initStars() {
-        stars = [];
-        const numStars = 400;
-
-        for (let i = 0; i < numStars; i++) {
-          const rand = Math.random();
-          let size;
-          if (rand < 0.7) {
-            size = Math.random() * 0.8 + 0.3;
-          } else if (rand < 0.9) {
-            size = Math.random() * 1.2 + 0.8;
-          } else {
-            size = Math.random() * 1.8 + 1.2;
-          }
-
-          stars.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height * 3,
-            size: size,
-            speed: Math.random() * 0.5 + 0.1,
-            brightness: Math.random() * 0.3 + 0.25,
-            twinkle: Math.random() * Math.PI * 2,
-            twinkleSpeed: Math.random() * 0.02 + 0.01
-          });
-        }
-      }
-
-      function createShootingStar() {
-        const side = Math.random();
-        let startX, startY, endX, endY;
-        
-        if (side < 0.5) {
-          startX = Math.random() * canvas.width * 0.3;
-          startY = Math.random() * canvas.height * 0.3;
-          endX = startX + 200 + Math.random() * 300;
-          endY = startY + 200 + Math.random() * 300;
-        } else {
-          startX = canvas.width * 0.7 + Math.random() * canvas.width * 0.3;
-          startY = Math.random() * canvas.height * 0.3;
-          endX = startX - 200 - Math.random() * 300;
-          endY = startY + 200 + Math.random() * 300;
-        }
-        
-        shootingStars.push({
-          x: startX,
-          y: startY,
-          endX: endX,
-          endY: endY,
-          progress: 0,
-          speed: 0.015 + Math.random() * 0.01,
-          opacity: 1
-        });
-      }
-
-      function drawShootingStars() {
-        shootingStars.forEach((star, index) => {
-          star.progress += star.speed;
-          
-          if (star.progress > 1) {
-            star.opacity -= 0.05;
-          }
-          
-          if (star.opacity <= 0) {
-            shootingStars.splice(index, 1);
-            return;
-          }
-          
-          const currentX = star.x + (star.endX - star.x) * star.progress;
-          const currentY = star.y + (star.endY - star.y) * star.progress;
-          
-          const tailX = currentX - (star.endX - star.x) * 0.05;
-          const tailY = currentY - (star.endY - star.y) * 0.05;
-          
-          const gradient = ctx.createLinearGradient(tailX, tailY, currentX, currentY);
-          gradient.addColorStop(0, `rgba(255, 255, 255, 0)`);
-          gradient.addColorStop(0.5, `rgba(255, 255, 255, ${0.3 * star.opacity})`);
-          gradient.addColorStop(1, `rgba(255, 255, 255, ${0.8 * star.opacity})`);
-          
-          ctx.beginPath();
-          ctx.moveTo(tailX, tailY);
-          ctx.lineTo(currentX, currentY);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = 2;
-          ctx.stroke();
-          
-          ctx.beginPath();
-          ctx.arc(currentX, currentY, 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = '#fff';
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        });
-      }
-
-      function drawStars() {
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        stars.forEach(star => {
-          const yPos = (star.y - scrollY * star.speed) % (canvas.height + 500);
-
-          star.twinkle += star.twinkleSpeed;
-          const twinkleFactor = 0.8 + Math.sin(star.twinkle) * 0.2;
-
-          ctx.beginPath();
-          ctx.arc(star.x, yPos, star.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness * twinkleFactor})`;
-          ctx.fill();
-
-          if (star.size > 1) {
-            ctx.shadowBlur = 4 * twinkleFactor;
-            ctx.shadowColor = '#fff';
-            ctx.fill();
-            ctx.shadowBlur = 0;
-          }
-        });
-
-        drawShootingStars();
-      }
-
-      function animate() {
-        drawStars();
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('scroll', () => {
-        scrollY = window.scrollY;
-      });
-
-      window.addEventListener('resize', resizeCanvas);
-
-      resizeCanvas();
-      animate();
-
-      setInterval(() => {
-        if (Math.random() > 0.3) {
-          createShootingStar();
-        }
-      }, 8000);
+      const canvas=document.getElementById('starfield');const ctx=canvas.getContext('2d');
+      let stars=[],shootingStars=[],scrollY=0;
+      function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;initStars();}
+      function initStars(){stars=[];for(let i=0;i<400;i++){const r=Math.random();let size=r<0.7?Math.random()*0.8+0.3:r<0.9?Math.random()*1.2+0.8:Math.random()*1.8+1.2;stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height*3,size,speed:Math.random()*0.5+0.1,brightness:Math.random()*0.3+0.25,twinkle:Math.random()*Math.PI*2,twinkleSpeed:Math.random()*0.02+0.01});}}
+      function createShootingStar(){const s=Math.random();let sx=s<0.5?Math.random()*canvas.width*0.3:canvas.width*0.7+Math.random()*canvas.width*0.3,sy=Math.random()*canvas.height*0.3;shootingStars.push({x:sx,y:sy,endX:s<0.5?sx+200+Math.random()*300:sx-200-Math.random()*300,endY:sy+200+Math.random()*300,progress:0,speed:0.015+Math.random()*0.01,opacity:1});}
+      function drawShootingStars(){shootingStars.forEach((star,i)=>{star.progress+=star.speed;if(star.progress>1)star.opacity-=0.05;if(star.opacity<=0){shootingStars.splice(i,1);return;}const cx=star.x+(star.endX-star.x)*star.progress,cy=star.y+(star.endY-star.y)*star.progress,tx=cx-(star.endX-star.x)*0.05,ty=cy-(star.endY-star.y)*0.05;const g=ctx.createLinearGradient(tx,ty,cx,cy);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(0.5,`rgba(255,255,255,${0.3*star.opacity})`);g.addColorStop(1,`rgba(255,255,255,${0.8*star.opacity})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(cx,cy);ctx.strokeStyle=g;ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${star.opacity})`;ctx.shadowBlur=10;ctx.shadowColor='#fff';ctx.fill();ctx.shadowBlur=0;});}
+      function drawStars(){ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);stars.forEach(star=>{const yPos=(star.y-scrollY*star.speed)%(canvas.height+500);star.twinkle+=star.twinkleSpeed;const tf=0.8+Math.sin(star.twinkle)*0.2;ctx.beginPath();ctx.arc(star.x,yPos,star.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${star.brightness*tf})`;ctx.fill();if(star.size>1){ctx.shadowBlur=4*tf;ctx.shadowColor='#fff';ctx.fill();ctx.shadowBlur=0;}});drawShootingStars();}
+      function animate(){drawStars();requestAnimationFrame(animate);}
+      window.addEventListener('scroll',()=>{scrollY=window.scrollY;});
+      window.addEventListener('resize',resizeCanvas);
+      resizeCanvas();animate();
+      setInterval(()=>{if(Math.random()>0.3)createShootingStar();},8000);
     </script>
 
-    
-    
     <script>
-  // Scroll progress indicator
-  const progressLine = document.querySelector('.progress-line');
-  const progressGlow = document.querySelector('.progress-glow');
+      const progressLine=document.querySelector('.progress-line');
+      const progressGlow=document.querySelector('.progress-glow');
+      function updateProgress(){const pct=(window.pageYOffset/(document.documentElement.scrollHeight-window.innerHeight))*100;progressLine.style.height=pct+'%';progressGlow.style.opacity=pct>2?'1':'0';progressGlow.style.bottom=(100-pct)+'%';}
+      window.addEventListener('scroll',updateProgress);
+      window.addEventListener('resize',updateProgress);
+      updateProgress();
+    </script>
 
-  function updateProgress() {
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
-    
-    progressLine.style.height = scrollPercent + '%';
-    
-    if (scrollPercent > 2) {
-      progressGlow.style.opacity = '1';
-      progressGlow.style.bottom = (100 - scrollPercent) + '%';
-    } else {
-      progressGlow.style.opacity = '0';
-    }
-  }
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightboxClose">&#x2715;</button>
+      <img id="lightboxImg" src="" alt="">
+    </div>
 
-  window.addEventListener('scroll', updateProgress);
-  window.addEventListener('resize', updateProgress);
-  
-  updateProgress();
-</script>
-    
-    
     <script>
-  // Color Palette Extractor
-  function extractColors() {
-    const mainImage = document.querySelector('.project-image');
-    const swatchesContainer = document.getElementById('colorSwatches');
-    
-    if (!mainImage) return;
-    
-    // Create a canvas to analyze the image
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Wait for image to load
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.src = mainImage.src;
-    
-    img.onload = function() {
-      // Set canvas size (smaller for faster processing)
-      canvas.width = 100;
-      canvas.height = 100;
-      
-      // Draw image on canvas
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      
-      // Get image data
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const pixels = imageData.data;
-      
-      // Extract colors using k-means clustering (simplified)
-      const colors = [];
-      const sampleRate = 10; // Sample every 10th pixel
-      
-      for (let i = 0; i < pixels.length; i += 4 * sampleRate) {
-        const r = pixels[i];
-        const g = pixels[i + 1];
-        const b = pixels[i + 2];
-        const a = pixels[i + 3];
-        
-        // Skip very transparent or very dark/light pixels
-        if (a > 200 && (r + g + b) > 50 && (r + g + b) < 700) {
-          colors.push({ r, g, b });
-        }
-      }
-      
-      // Get dominant colors (simplified clustering)
-      const dominantColors = getDominantColors(colors, 5);
-      
-      // Display swatches
-      displaySwatches(dominantColors, swatchesContainer);
-    };
-    
-    img.onerror = function() {
-      swatchesContainer.innerHTML = '<p style="color: rgba(255, 255, 255, 0.5);">Unable to extract colors from this image.</p>';
-    };
-  }
-  
-  function getDominantColors(colors, count) {
-    if (colors.length === 0) return [];
-    
-    // Simple clustering: group similar colors
-    const clusters = [];
-    
-    colors.forEach(color => {
-      let foundCluster = false;
-      
-      for (let cluster of clusters) {
-        const diff = Math.abs(color.r - cluster.r) + 
-                     Math.abs(color.g - cluster.g) + 
-                     Math.abs(color.b - cluster.b);
-        
-        if (diff < 100) {
-          cluster.colors.push(color);
-          foundCluster = true;
-          break;
-        }
-      }
-      
-      if (!foundCluster) {
-        clusters.push({ ...color, colors: [color] });
-      }
-    });
-    
-    // Sort by cluster size and get averages
-    clusters.sort((a, b) => b.colors.length - a.colors.length);
-    
-    return clusters.slice(0, count).map(cluster => {
-      const avg = cluster.colors.reduce((acc, c) => ({
-        r: acc.r + c.r,
-        g: acc.g + c.g,
-        b: acc.b + c.b
-      }), { r: 0, g: 0, b: 0 });
-      
-      return {
-        r: Math.round(avg.r / cluster.colors.length),
-        g: Math.round(avg.g / cluster.colors.length),
-        b: Math.round(avg.b / cluster.colors.length)
-      };
-    });
-  }
-  
-  function rgbToHex(r, g, b) {
-    return "#" + [r, g, b].map(x => {
-      const hex = x.toString(16);
-      return hex.length === 1 ? "0" + hex : hex;
-    }).join('');
-  }
-  
-  function displaySwatches(colors, container) {
-    container.innerHTML = '';
-    
-    colors.forEach((color, index) => {
-      const hex = rgbToHex(color.r, color.g, color.b);
-      const rgb = `rgb(${color.r}, ${color.g}, ${color.b})`;
-      
-      const swatch = document.createElement('div');
-      swatch.className = 'color-swatch';
-      swatch.style.backgroundColor = rgb;
-      swatch.style.animationDelay = (index * 0.1) + 's';
-      
-      const info = document.createElement('div');
-      info.className = 'color-info';
-      info.innerHTML = `
-        <div class="color-code">${hex}</div>
-        <div style="font-size: 10px; margin-top: 3px; opacity: 0.7;">Click to copy</div>
-      `;
-      
-      swatch.appendChild(info);
-      
-      // Copy to clipboard on click
-      swatch.addEventListener('click', () => {
-        navigator.clipboard.writeText(hex).then(() => {
-          showCopyIndicator(swatch, 'Copied!');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxClose = document.getElementById('lightboxClose');
+
+      document.querySelectorAll('.showcase-img, .split-img, .process-grid img').forEach(img => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
         });
       });
-      
-      container.appendChild(swatch);
-    });
-  }
-  
-  function showCopyIndicator(element, text) {
-    const indicator = document.createElement('div');
-    indicator.className = 'copy-indicator';
-    indicator.textContent = text;
-    element.appendChild(indicator);
-    
-    setTimeout(() => indicator.classList.add('show'), 10);
-    setTimeout(() => {
-      indicator.classList.remove('show');
-      setTimeout(() => indicator.remove(), 300);
-    }, 1500);
-  }
-  
-  // Run extraction when page loads
-  window.addEventListener('load', () => {
-    setTimeout(extractColors, 500);
-  });
-</script>
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    </script>
   </body>
 </html>
