@@ -8,49 +8,150 @@
     <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
     <title>Brand Design - Hafsa Abbasi</title>
     <style>
-      * { cursor: none !important; box-sizing: border-box; }
+      * {
+        cursor: none !important;
+        box-sizing: border-box;
+      }
 
       .custom-cursor {
-        position: fixed; width: 8px; height: 8px;
-        background: rgba(255,215,0,0.9); border-radius: 50%;
-        pointer-events: none; z-index: 10000;
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 215, 0, 0.9);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
         transition: transform 0.15s ease-out;
-        box-shadow: 0 0 15px rgba(255,215,0,0.6), 0 0 25px rgba(255,215,0,0.3);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.3);
       }
+
       .cursor-ring {
-        position: fixed; width: 40px; height: 40px;
-        border: 1px solid rgba(255,215,0,0.4); border-radius: 50%;
-        pointer-events: none; z-index: 9999;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
         transition: all 0.2s ease-out;
-        box-shadow: 0 0 20px rgba(255,215,0,0.2);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
       }
+
       .cursor-sparkle {
-        position: fixed; width: 4px; height: 4px;
-        background: rgba(255,215,0,0.8); border-radius: 50%;
-        pointer-events: none; z-index: 9998;
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 215, 0, 0.8);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
         animation: sparkle-fade 0.8s ease-out forwards;
       }
-      @keyframes sparkle-fade { 0% { opacity:1; transform:scale(1); } 100% { opacity:0; transform:scale(0.3); } }
-      .cursor-ring.hover { width:60px; height:60px; border-color:rgba(255,215,0,0.7); border-width:2px; }
-      .custom-cursor.hover { transform:scale(0.6); background:rgba(255,215,0,1); }
 
-      #starfield { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
+      @keyframes sparkle-fade {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
 
-      body { margin:0; padding:0; background:#000; color:#fff; font-family:'Ysabeau Infant',sans-serif; }
+        100% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+      }
+
+      .cursor-ring.hover {
+        width: 60px;
+        height: 60px;
+        border-color: rgba(255, 215, 0, 0.7);
+        border-width: 2px;
+      }
+
+      .custom-cursor.hover {
+        transform: scale(0.6);
+        background: rgba(255, 215, 0, 1);
+      }
+
+      #starfield {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        color: #fff;
+        font-family: 'Ysabeau Infant', sans-serif;
+      }
 
       @font-face {
         font-family: 'TheScientist';
         src: url('TheScientist-L3EyW.woff') format('woff'), url('TheScientist-L3EyW.ttf') format('truetype');
       }
 
-      .scroll-progress { position:fixed; top:0; right:60px; height:100vh; width:2px; background:rgba(255,215,0,0.1); z-index:50; pointer-events:none; }
-      .progress-line { position:absolute; top:0; left:0; width:100%; height:0%; background:linear-gradient(180deg,rgba(133,120,150,0.3) 0%,rgba(133,120,150,0.8) 50%,rgba(133,120,150,1) 100%); transition:height 0.1s ease-out; }
-      .progress-glow { position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:8px; height:8px; background:rgba(133,120,150,1); border-radius:50%; box-shadow:0 0 15px rgba(133,120,150,0.8); opacity:0; transition:bottom 0.1s ease-out,opacity 0.3s ease-out; }
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        right: 60px;
+        height: 100vh;
+        width: 2px;
+        background: rgba(255, 215, 0, 0.1);
+        z-index: 50;
+        pointer-events: none;
+      }
 
-      .close-btn { position:fixed; top:40px; right:100px; font-size:40px; color:rgba(255,169,88,1); text-decoration:none; z-index:100; transition:transform 0.3s,color 0.3s; font-weight:300; }
-      .close-btn:hover { transform:rotate(90deg); color:rgba(255,215,0,1); }
+      .progress-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background: linear-gradient(180deg, rgba(133, 120, 150, 0.3) 0%, rgba(133, 120, 150, 0.8) 50%, rgba(133, 120, 150, 1) 100%);
+        transition: height 0.1s ease-out;
+      }
 
-      .page-wrapper { max-width:1200px; margin:0 auto; padding:0 60px 100px; }
+      .progress-glow {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: rgba(133, 120, 150, 1);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(133, 120, 150, 0.8);
+        opacity: 0;
+        transition: bottom 0.1s ease-out, opacity 0.3s ease-out;
+      }
+
+      .close-btn {
+        position: fixed;
+        top: 40px;
+        right: 100px;
+        font-size: 40px;
+        color: rgba(255, 169, 88, 1);
+        text-decoration: none;
+        z-index: 100;
+        transition: transform 0.3s, color 0.3s;
+        font-weight: 300;
+      }
+
+      .close-btn:hover {
+        transform: rotate(90deg);
+        color: rgba(255, 215, 0, 1);
+      }
+
+      .page-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 60px 100px;
+      }
 
       /* HERO */
       .hero {
@@ -62,26 +163,132 @@
         padding-top: 80px;
         padding-bottom: 60px;
       }
+
       .project-title {
         font-family: 'TheScientist', cursive;
-        font-size: 52px; color: rgba(255,169,88,1);
-        margin: 0 0 14px; line-height: 1.1;
+        font-size: 52px;
+        color: rgba(255, 169, 88, 1);
+        margin: 0 0 14px;
+        line-height: 1.1;
       }
-      .project-meta { font-size:13px; color:rgba(255,169,88,0.55); margin:0 0 28px; letter-spacing:0.5px; }
-      .hero-intro { font-size:16px; line-height:2; color:rgba(255,255,255,0.8); margin:0 0 36px; }
+
+      .project-meta {
+        font-size: 13px;
+        color: rgba(255, 169, 88, 0.55);
+        margin: 0 0 28px;
+        letter-spacing: 0.5px;
+      }
+
+      .hero-intro {
+        font-size: 16px;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0 0 36px;
+      }
+
       .project-role {
-        padding-top:24px; border-top:1px solid rgba(255,169,88,0.2);
-        display:grid; grid-template-columns:1fr 1fr; gap:20px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 169, 88, 0.2);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
       }
-      .role-item label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:2px; color:rgba(255,169,88,0.55); margin-bottom:4px; }
-      .role-item span { font-size:13px; color:rgba(255,255,255,0.75); line-height:1.6; }
-      .hero-image img { width:100%; height:auto; border-radius:20px; display:block; }
+
+      .role-item label {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 169, 88, 0.55);
+        margin-bottom: 4px;
+      }
+
+      .role-item span {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.6;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        display: block;
+      }
+
+      /* DISCLAIMER BANNER */
+      .disclaimer-banner {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        background: rgba(255, 169, 88, 0.04);
+        border: 1px solid rgba(255, 169, 88, 0.2);
+        border-radius: 16px;
+        padding: 20px 24px;
+        margin-bottom: 40px;
+      }
+
+      .disclaimer-icon {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(255, 169, 88, 0.35);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+      }
+
+      .disclaimer-icon svg {
+        width: 14px;
+        height: 14px;
+        color: rgba(255, 169, 88, 0.7);
+      }
+
+      .disclaimer-text {
+        font-size: 12px;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.45);
+        letter-spacing: 0.3px;
+      }
+
+      .disclaimer-text strong {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba(255, 169, 88, 0.5);
+        font-weight: 400;
+        margin-bottom: 4px;
+      }
 
       /* SECTION */
-      .section-divider { border:none; border-top:1px solid rgba(255,169,88,0.12); margin:0; }
-      .content-section { padding:80px 0; }
-      .section-label { font-family:'TheScientist',cursive; font-size:12px; text-transform:uppercase; letter-spacing:3px; color:rgba(255,169,88,0.45); margin:0 0 12px; }
-      .section-title { font-family:'TheScientist',cursive; font-size:36px; color:rgba(255,169,88,1); margin:0 0 32px; }
+      .section-divider {
+        border: none;
+        border-top: 1px solid rgba(255, 169, 88, 0.12);
+        margin: 0;
+      }
+
+      .content-section {
+        padding: 80px 0;
+      }
+
+      .section-label {
+        font-family: 'TheScientist', cursive;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: rgba(255, 169, 88, 0.45);
+        margin: 0 0 12px;
+      }
+
+      .section-title {
+        font-family: 'TheScientist', cursive;
+        font-size: 36px;
+        color: rgba(255, 169, 88, 1);
+        margin: 0 0 32px;
+      }
 
       /* SPLIT TEXT + IMAGE */
       .split-row {
@@ -91,62 +298,274 @@
         align-items: center;
         margin-bottom: 40px;
       }
-      .split-row.flip { direction:rtl; }
-      .split-row.flip > * { direction:ltr; }
-      .split-copy { font-size:16px; line-height:2; color:rgba(255,255,255,0.8); }
-      .split-copy p { margin:0 0 18px; }
-      .split-copy p:last-child { margin:0; }
-      .split-img { width:100%; border-radius:16px; display:block; }
+
+      .split-row.flip {
+        direction: rtl;
+      }
+
+      .split-row.flip>* {
+        direction: ltr;
+      }
+
+      .split-copy {
+        font-size: 16px;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .split-copy p {
+        margin: 0 0 18px;
+      }
+
+      .split-copy p:last-child {
+        margin: 0;
+      }
+
+      .split-img {
+        width: 100%;
+        border-radius: 16px;
+        display: block;
+      }
 
       /* IMAGE GRID */
-      .showcase-row { display:grid; gap:16px; margin-bottom:16px; }
-      .showcase-row.full { grid-template-columns:1fr; }
-      .showcase-row.half { grid-template-columns:1fr 1fr; }
-      .showcase-row.thirds { grid-template-columns:1fr 1fr 1fr; }
-      .showcase-img { width:100%; height:100%; object-fit:cover; border-radius:16px; display:block; transition:transform 0.4s ease,box-shadow 0.4s ease; }
-      .showcase-img:hover { transform:scale(1.01); box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+      .showcase-row {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .showcase-row.full {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-row.half {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .showcase-row.thirds {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .showcase-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 16px;
+        display: block;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .showcase-img:hover {
+        transform: scale(1.01);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      }
 
       /* PROCESS */
-      .process-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-      .process-grid img { width:100%; height:auto; border-radius:16px; display:block; transition:transform 0.4s ease,box-shadow 0.4s ease; }
-      .process-grid img:hover { transform:scale(1.01); box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
 
-      .body-text { font-size:16px; line-height:2; color:rgba(255,255,255,0.8); max-width:620px; margin:0 0 40px; }
+      .process-grid img {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        display: block;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .process-grid img:hover {
+        transform: scale(1.01);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      }
+
+      .body-text {
+        font-size: 16px;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 620px;
+        margin: 0 0 40px;
+      }
+
+      /* VIDEO ADS */
+      .ads-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 8px;
+      }
+
+      .ad-card {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .ad-thumb {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(255, 169, 88, 0.04);
+        border: 1px solid rgba(255, 169, 88, 0.15);
+        aspect-ratio: 16/9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      .ad-thumb:hover {
+        border-color: rgba(255, 169, 88, 0.4);
+        box-shadow: 0 0 40px rgba(255, 169, 88, 0.1);
+      }
+
+      .ad-thumb a {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .ad-play {
+        width: 52px;
+        height: 52px;
+        background: rgba(255, 169, 88, 0.15);
+        border: 1.5px solid rgba(255, 169, 88, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s, transform 0.3s;
+      }
+
+      .ad-thumb:hover .ad-play {
+        background: rgba(255, 169, 88, 0.25);
+        transform: scale(1.08);
+      }
+
+      .ad-play svg {
+        width: 18px;
+        height: 18px;
+        color: rgba(255, 169, 88, 0.9);
+        margin-left: 3px;
+      }
+
+      .ad-platform {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: rgba(255, 169, 88, 0.6);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 3px 10px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 169, 88, 0.2);
+      }
+
+      .ad-info {}
+
+      .ad-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0 0 5px;
+        letter-spacing: 0.2px;
+      }
+
+      .ad-desc {
+        font-size: 12px;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.4);
+        margin: 0;
+      }
+
+      .ad-ai-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: rgba(255, 169, 88, 0.45);
+        margin-bottom: 20px;
+      }
+
+      .ad-ai-tag::before {
+        content: '✦';
+        font-size: 8px;
+      }
 
       /* LIGHTBOX */
       .lightbox {
-        position:fixed; inset:0;
-        background:rgba(0,0,0,0.92);
-        z-index:99999;
-        display:flex; align-items:center; justify-content:center;
-        opacity:0; pointer-events:none;
-        transition:opacity 0.3s ease;
-        backdrop-filter:blur(8px);
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        backdrop-filter: blur(8px);
       }
-      .lightbox.active { opacity:1; pointer-events:all; }
+
+      .lightbox.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
       .lightbox img {
-        max-width:90vw; max-height:90vh;
-        border-radius:16px;
-        box-shadow:0 40px 100px rgba(0,0,0,0.8);
-        transform:scale(0.95);
-        transition:transform 0.3s ease;
-        object-fit:contain;
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 16px;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        transform: scale(0.95);
+        transition: transform 0.3s ease;
+        object-fit: contain;
         cursor: zoom-out !important;
       }
-      .lightbox.active img { transform:scale(1); }
-      .lightbox-close {
-        position:fixed; top:32px; right:60px;
-        font-size:40px; color:rgba(255,169,88,1);
-        background:none; border:none;
-        z-index:100000; transition:transform 0.3s,color 0.3s;
-        font-weight:300; line-height:1;
+
+      .lightbox.active img {
+        transform: scale(1);
       }
-      .lightbox-close:hover { transform:rotate(90deg); color:rgba(255,215,0,1); }
-      .showcase-img, .split-img, .process-grid img { cursor:zoom-in !important; }
+
+      .lightbox-close {
+        position: fixed;
+        top: 32px;
+        right: 60px;
+        font-size: 40px;
+        color: rgba(255, 169, 88, 1);
+        background: none;
+        border: none;
+        z-index: 100000;
+        transition: transform 0.3s, color 0.3s;
+        font-weight: 300;
+        line-height: 1;
+      }
+
+      .lightbox-close:hover {
+        transform: rotate(90deg);
+        color: rgba(255, 215, 0, 1);
+      }
+
+      .showcase-img,
+      .split-img,
+      .process-grid img {
+        cursor: zoom-in !important;
+      }
     </style>
   </head>
   <body>
-    <div class="scroll-progress"><div class="progress-line"></div><div class="progress-glow"></div></div>
+    <div class="scroll-progress">
+      <div class="progress-line"></div>
+      <div class="progress-glow"></div>
+    </div>
     <canvas id="starfield"></canvas>
     <div class="custom-cursor"></div>
     <div class="cursor-ring"></div>
@@ -154,20 +573,19 @@
 
     <div class="page-wrapper">
 
-      <!-- HERO: text left, first image right — visible on load -->
+      <!-- HERO -->
       <div class="hero">
         <div>
           <h1 class="project-title">Brand Redesign —<br>Everest Masala</h1>
           <p class="project-meta">2025 &nbsp;·&nbsp; Logo / Packaging / Socials &nbsp;·&nbsp; Illustrator · Photoshop · Adobe Firefly</p>
           <p class="hero-intro">Everest Masala is a heritage Indian spice brand established in 1947 with strong market recognition but an outdated visual identity — suffering from poor hierarchy, cluttered layouts, weak shelf presence, and difficult-to-use packaging.</p>
-          
-          
+
           <p>
-  <a href="https://drive.google.com/file/d/1Vus_PXRtdpDXgsnKBLxMQ0_HjXDfDRDN/view?usp=sharing" style="color: white;">
-    View Presentation
-  </a>
-</p>
-          
+            <a href="https://drive.google.com/file/d/1Vus_PXRtdpDXgsnKBLxMQ0_HjXDfDRDN/view?usp=sharing" style="color: white;">
+              View Presentation
+            </a>
+          </p>
+
           <div class="project-role">
             <div class="role-item"><label>Role</label><span>Brand Strategy · Visual Identity · Packaging · Social</span></div>
             <div class="role-item"><label>Tools</label><span>Adobe Firefly · Photoshop · Illustrator</span></div>
@@ -180,14 +598,28 @@
         </div>
       </div>
 
+      <!-- DISCLAIMER -->
+      <div class="disclaimer-banner">
+        <div class="disclaimer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="disclaimer-text">
+          <strong>Student Project · Disclaimer</strong>
+          This is a fictional rebranding case study based on a brand I admired, created as part of a school assignment to hone my design and marketing skills. This project is not affiliated with, endorsed by, or sanctioned by Everest Food Products Pvt. Ltd. All original trademarks and brand assets belong to their respective owners.
+        </div>
+      </div>
+
       <hr class="section-divider">
 
-      <!-- CONCEPT: text + logo -->
+      <!-- CONCEPT -->
       <div class="content-section">
         <div class="split-row">
           <div>
-            <p class="section-label">Concept</p>
-            <h2 class="section-title">Built to Speak</h2>
+            <p class="section-label" <h2 class="section-title">Built to Speak</h2>
             <div class="split-copy">
               <p>The rebrand is built around the idea that Everest blends are architecturally precise — carefully layered with intentional structure — and communicate culture, memory, and identity through flavor.</p>
               <p>The mountain logo references both the brand name and the layered construction of spice blends. The teal-burgundy-gold palette provides modern shelf distinction rooted in Indian heritage.</p>
@@ -201,12 +633,11 @@
 
       <hr class="section-divider">
 
-      <!-- PACKAGING: image left, text right -->
+      <!-- PACKAGING -->
       <div class="content-section">
         <div class="split-row flip">
           <div>
-            <p class="section-label">Packaging</p>
-            <h2 class="section-title">Solving the UX</h2>
+            <p class="section-label" <h2 class="section-title">Solving the UX</h2>
             <div class="split-copy">
               <p>The redesign shifted from rigid boxes to resealable stand-up pouches, solving every UX pain point. A Mughal arch window acts as both functional element and visual metaphor.</p>
               <p>Traditional Indian patterns function as visual "dialects" across different spice varieties — creating variety within a cohesive system.</p>
@@ -226,8 +657,8 @@
 
       <!-- MERCH -->
       <div class="content-section">
-        <p class="section-label">Extensions</p>
-        <h2 class="section-title">Merchandise & Socials</h2>
+        <p class="section-label"></p>
+        <h2 class="section-title">Merchandise and Socials</h2>
         <p class="body-text">The system extended across premium glass jars, branded merchandise, and a complete social media strategy for Instagram, TikTok, and Pinterest — all built with Adobe Firefly across 100+ iterations.</p>
         <div class="showcase-row thirds">
           <img src="merch 1.png" alt="Merchandise 1" class="showcase-img">
@@ -240,7 +671,7 @@
 
       <!-- FINAL -->
       <div class="content-section">
-        <p class="section-label">Result</p>
+        <p class="section-label"></p>
         <h2 class="section-title">Final System</h2>
         <div class="showcase-row full">
           <img src="final.png" alt="Final brand presentation" class="showcase-img">
@@ -249,9 +680,23 @@
 
       <hr class="section-divider">
 
+      <!-- ADS -->
+      <div class="content-section">
+        <p class="section-label"></p>
+        <h2 class="section-title">Video Ads</h2>
+        <p class="ad-ai-tag">AI-generated visuals · All concepts and creative direction by Hafsa Abbasi</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <a href="https://youtu.be/m934aMgs6Zs?si=uJQPCjo0gsWUfdhL" target="_blank" style="color:rgba(255,169,88,0.8); font-size:14px; letter-spacing:0.3px;">Ad 1</a>
+          <a href="https://youtube.com/shorts/WoDAH1Gwc7U?si=aNYA3hQD62E66WGS" target="_blank" style="color:rgba(255,169,88,0.8); font-size:14px; letter-spacing:0.3px;">Ad 2</a>
+          <a href="https://youtube.com/shorts/YCKkcpsIFYg?si=IPRvcUF-Xlh5d4e_" target="_blank" style="color:rgba(255,169,88,0.8); font-size:14px; letter-spacing:0.3px;">Ad 3</a>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+
       <!-- PROCESS -->
       <div class="content-section">
-        <p class="section-label">Behind the Work</p>
+        <p class="section-label"></p>
         <h2 class="section-title">Process</h2>
         <div class="process-grid">
           <img src="process 1.png" alt="Process 1">
@@ -270,42 +715,172 @@
     <script>
       const cursor = document.querySelector('.custom-cursor');
       const cursorRing = document.querySelector('.cursor-ring');
-      let mouseX=0,mouseY=0,ringX=0,ringY=0;
-      document.addEventListener('mousemove',(e)=>{
-        mouseX=e.clientX;mouseY=e.clientY;
-        cursor.style.left=mouseX+'px';cursor.style.top=mouseY+'px';
-        if(Math.random()>0.85)createSparkle(mouseX,mouseY);
+      let mouseX = 0,
+        mouseY = 0,
+        ringX = 0,
+        ringY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+        if (Math.random() > 0.85) createSparkle(mouseX, mouseY);
       });
-      function animateRing(){ringX+=(mouseX-ringX)*0.15;ringY+=(mouseY-ringY)*0.15;cursorRing.style.left=(ringX-20)+'px';cursorRing.style.top=(ringY-20)+'px';requestAnimationFrame(animateRing);}
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.left = (ringX - 20) + 'px';
+        cursorRing.style.top = (ringY - 20) + 'px';
+        requestAnimationFrame(animateRing);
+      }
       animateRing();
-      function createSparkle(x,y){const s=document.createElement('div');s.className='cursor-sparkle';s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),800);}
-      document.querySelectorAll('a,button').forEach(el=>{
-        el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');cursorRing.classList.add('hover');});
-        el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');cursorRing.classList.remove('hover');});
+
+      function createSparkle(x, y) {
+        const s = document.createElement('div');
+        s.className = 'cursor-sparkle';
+        s.style.left = x + 'px';
+        s.style.top = y + 'px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 800);
+      }
+      document.querySelectorAll('a,button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('hover');
+          cursorRing.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('hover');
+          cursorRing.classList.remove('hover');
+        });
       });
     </script>
 
     <script>
-      const canvas=document.getElementById('starfield');const ctx=canvas.getContext('2d');
-      let stars=[],shootingStars=[],scrollY=0;
-      function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;initStars();}
-      function initStars(){stars=[];for(let i=0;i<400;i++){const r=Math.random();let size=r<0.7?Math.random()*0.8+0.3:r<0.9?Math.random()*1.2+0.8:Math.random()*1.8+1.2;stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height*3,size,speed:Math.random()*0.5+0.1,brightness:Math.random()*0.3+0.25,twinkle:Math.random()*Math.PI*2,twinkleSpeed:Math.random()*0.02+0.01});}}
-      function createShootingStar(){const s=Math.random();let sx=s<0.5?Math.random()*canvas.width*0.3:canvas.width*0.7+Math.random()*canvas.width*0.3,sy=Math.random()*canvas.height*0.3;shootingStars.push({x:sx,y:sy,endX:s<0.5?sx+200+Math.random()*300:sx-200-Math.random()*300,endY:sy+200+Math.random()*300,progress:0,speed:0.015+Math.random()*0.01,opacity:1});}
-      function drawShootingStars(){shootingStars.forEach((star,i)=>{star.progress+=star.speed;if(star.progress>1)star.opacity-=0.05;if(star.opacity<=0){shootingStars.splice(i,1);return;}const cx=star.x+(star.endX-star.x)*star.progress,cy=star.y+(star.endY-star.y)*star.progress,tx=cx-(star.endX-star.x)*0.05,ty=cy-(star.endY-star.y)*0.05;const g=ctx.createLinearGradient(tx,ty,cx,cy);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(0.5,`rgba(255,255,255,${0.3*star.opacity})`);g.addColorStop(1,`rgba(255,255,255,${0.8*star.opacity})`);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(cx,cy);ctx.strokeStyle=g;ctx.lineWidth=2;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${star.opacity})`;ctx.shadowBlur=10;ctx.shadowColor='#fff';ctx.fill();ctx.shadowBlur=0;});}
-      function drawStars(){ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);stars.forEach(star=>{const yPos=(star.y-scrollY*star.speed)%(canvas.height+500);star.twinkle+=star.twinkleSpeed;const tf=0.8+Math.sin(star.twinkle)*0.2;ctx.beginPath();ctx.arc(star.x,yPos,star.size,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${star.brightness*tf})`;ctx.fill();if(star.size>1){ctx.shadowBlur=4*tf;ctx.shadowColor='#fff';ctx.fill();ctx.shadowBlur=0;}});drawShootingStars();}
-      function animate(){drawStars();requestAnimationFrame(animate);}
-      window.addEventListener('scroll',()=>{scrollY=window.scrollY;});
-      window.addEventListener('resize',resizeCanvas);
-      resizeCanvas();animate();
-      setInterval(()=>{if(Math.random()>0.3)createShootingStar();},8000);
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      let stars = [],
+        shootingStars = [],
+        scrollY = 0;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initStars();
+      }
+
+      function initStars() {
+        stars = [];
+        for (let i = 0; i < 400; i++) {
+          const r = Math.random();
+          let size = r < 0.7 ? Math.random() * 0.8 + 0.3 : r < 0.9 ? Math.random() * 1.2 + 0.8 : Math.random() * 1.8 + 1.2;
+          stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height * 3,
+            size,
+            speed: Math.random() * 0.5 + 0.1,
+            brightness: Math.random() * 0.3 + 0.25,
+            twinkle: Math.random() * Math.PI * 2,
+            twinkleSpeed: Math.random() * 0.02 + 0.01
+          });
+        }
+      }
+
+      function createShootingStar() {
+        const s = Math.random();
+        let sx = s < 0.5 ? Math.random() * canvas.width * 0.3 : canvas.width * 0.7 + Math.random() * canvas.width * 0.3,
+          sy = Math.random() * canvas.height * 0.3;
+        shootingStars.push({
+          x: sx,
+          y: sy,
+          endX: s < 0.5 ? sx + 200 + Math.random() * 300 : sx - 200 - Math.random() * 300,
+          endY: sy + 200 + Math.random() * 300,
+          progress: 0,
+          speed: 0.015 + Math.random() * 0.01,
+          opacity: 1
+        });
+      }
+
+      function drawShootingStars() {
+        shootingStars.forEach((star, i) => {
+          star.progress += star.speed;
+          if (star.progress > 1) star.opacity -= 0.05;
+          if (star.opacity <= 0) {
+            shootingStars.splice(i, 1);
+            return;
+          }
+          const cx = star.x + (star.endX - star.x) * star.progress,
+            cy = star.y + (star.endY - star.y) * star.progress,
+            tx = cx - (star.endX - star.x) * 0.05,
+            ty = cy - (star.endY - star.y) * 0.05;
+          const g = ctx.createLinearGradient(tx, ty, cx, cy);
+          g.addColorStop(0, 'rgba(255,255,255,0)');
+          g.addColorStop(0.5, `rgba(255,255,255,${0.3*star.opacity})`);
+          g.addColorStop(1, `rgba(255,255,255,${0.8*star.opacity})`);
+          ctx.beginPath();
+          ctx.moveTo(tx, ty);
+          ctx.lineTo(cx, cy);
+          ctx.strokeStyle = g;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${star.opacity})`;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = '#fff';
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+      }
+
+      function drawStars() {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        stars.forEach(star => {
+          const yPos = (star.y - scrollY * star.speed) % (canvas.height + 500);
+          star.twinkle += star.twinkleSpeed;
+          const tf = 0.8 + Math.sin(star.twinkle) * 0.2;
+          ctx.beginPath();
+          ctx.arc(star.x, yPos, star.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${star.brightness*tf})`;
+          ctx.fill();
+          if (star.size > 1) {
+            ctx.shadowBlur = 4 * tf;
+            ctx.shadowColor = '#fff';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        });
+        drawShootingStars();
+      }
+
+      function animate() {
+        drawStars();
+        requestAnimationFrame(animate);
+      }
+      window.addEventListener('scroll', () => {
+        scrollY = window.scrollY;
+      });
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      animate();
+      setInterval(() => {
+        if (Math.random() > 0.3) createShootingStar();
+      }, 8000);
     </script>
 
     <script>
-      const progressLine=document.querySelector('.progress-line');
-      const progressGlow=document.querySelector('.progress-glow');
-      function updateProgress(){const pct=(window.pageYOffset/(document.documentElement.scrollHeight-window.innerHeight))*100;progressLine.style.height=pct+'%';progressGlow.style.opacity=pct>2?'1':'0';progressGlow.style.bottom=(100-pct)+'%';}
-      window.addEventListener('scroll',updateProgress);
-      window.addEventListener('resize',updateProgress);
+      const progressLine = document.querySelector('.progress-line');
+      const progressGlow = document.querySelector('.progress-glow');
+
+      function updateProgress() {
+        const pct = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressLine.style.height = pct + '%';
+        progressGlow.style.opacity = pct > 2 ? '1' : '0';
+        progressGlow.style.bottom = (100 - pct) + '%';
+      }
+      window.addEventListener('scroll', updateProgress);
+      window.addEventListener('resize', updateProgress);
       updateProgress();
     </script>
 
@@ -335,8 +910,12 @@
       }
 
       lightboxClose.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
     </script>
   </body>
 </html>
