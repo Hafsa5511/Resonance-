@@ -559,6 +559,118 @@
       .process-grid img {
         cursor: zoom-in !important;
       }
+      /* =========================
+   MOBILE RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+  * {
+    cursor: auto !important;
+  }
+
+  .custom-cursor,
+  .cursor-ring,
+  .cursor-sparkle,
+  .scroll-progress {
+    display: none !important;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .page-wrapper {
+    padding: 0 20px 80px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    min-height: auto;
+    padding-top: 120px;
+  }
+
+  .project-title {
+    font-size: 38px;
+    line-height: 1.1;
+  }
+
+  .project-meta {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .hero-intro,
+  .split-copy,
+  .body-text {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .project-role {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .split-row,
+  .split-row.flip {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    direction: ltr;
+  }
+
+  .section-title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .content-section {
+    padding: 60px 0;
+  }
+
+  .showcase-row.half,
+  .showcase-row.thirds,
+  .process-grid,
+  .ads-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .close-btn {
+    top: 24px;
+    right: 24px;
+    font-size: 34px;
+  }
+
+  .lightbox-close {
+    top: 20px;
+    right: 24px;
+    font-size: 34px;
+  }
+
+  .disclaimer-banner {
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .disclaimer-icon {
+    margin-top: 0;
+  }
+
+  .showcase-img,
+  .split-img,
+  .process-grid img,
+  .hero-image img {
+    border-radius: 14px;
+  }
+
+  canvas#starfield {
+    opacity: 0.7;
+  }
+
+  a {
+    word-break: break-word;
+  }
+}
     </style>
   </head>
   <body>
@@ -619,7 +731,8 @@
       <div class="content-section">
         <div class="split-row">
           <div>
-            <p class="section-label" <h2 class="section-title">Built to Speak</h2>
+           <p class="section-label"></p>
+<h2 class="section-title">Built to Speak</h2>
             <div class="split-copy">
               <p>The rebrand is built around the idea that Everest blends are architecturally precise — carefully layered with intentional structure — and communicate culture, memory, and identity through flavor.</p>
               <p>The mountain logo references both the brand name and the layered construction of spice blends. The teal-burgundy-gold palette provides modern shelf distinction rooted in Indian heritage.</p>
@@ -637,7 +750,8 @@
       <div class="content-section">
         <div class="split-row flip">
           <div>
-            <p class="section-label" <h2 class="section-title">Solving the UX</h2>
+            <p class="section-label"></p>
+<h2 class="section-title">Solving the UX</h2>
             <div class="split-copy">
               <p>The redesign shifted from rigid boxes to resealable stand-up pouches, solving every UX pain point. A Mughal arch window acts as both functional element and visual metaphor.</p>
               <p>Traditional Indian patterns function as visual "dialects" across different spice varieties — creating variety within a cohesive system.</p>
